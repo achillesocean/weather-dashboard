@@ -1,6 +1,7 @@
 import Card from "./Card";
 import { useQuery } from "@tanstack/react-query";
 import { getForecast } from "../../api";
+import WeatherIcon from "../WeatherIcon";
 
 type Props = {};
 
@@ -19,11 +20,7 @@ export default function DailyForecast({}: Props) {
               weekday: "short",
             })}
           </p>
-          <img
-            className="size-8"
-            src={daily.day.condition.icon}
-            alt="condition-icon"
-          />
+          <WeatherIcon src={daily.day.condition.icon} />
           <p>{Math.round(daily.day.avgtemp_c)}</p>
           <p className="text-gray-500/75">{Math.round(daily.day.mintemp_c)}</p>
           <p className="text-gray-500/75">{Math.round(daily.day.maxtemp_c)}</p>
