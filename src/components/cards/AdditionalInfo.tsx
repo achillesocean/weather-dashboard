@@ -5,12 +5,15 @@ import Wind from "/src/assets/wind.svg?react";
 import Uv from "/src/assets/uv.svg?react";
 import Cloud from "/src/assets/cloud.svg?react";
 import Precipitation from "/src/assets/precipitation.svg?react";
-type Props = {};
+import type { Coords } from "../../types";
+type Props = {
+  coords: Coords;
+};
 
-export default function AdditionalInfo({}: Props) {
+export default function AdditionalInfo({ coords }: Props) {
   const { data } = useSuspenseQuery({
     queryKey: ["weather"],
-    queryFn: () => getWeather({ lat: 10, lon: 30 }),
+    queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
   });
 
   return (
