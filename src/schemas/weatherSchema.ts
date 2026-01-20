@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const weatherSchema = z.object({
+export const WeatherSchema = z.object({
   location: z.object({
     name: z.string(),
     region: z.string(),
