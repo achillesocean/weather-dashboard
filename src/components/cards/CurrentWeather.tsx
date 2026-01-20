@@ -14,7 +14,7 @@ export default function CurrentWeather({}: Props) {
   return (
     <Card
       title="Current Weather"
-      childrenClassName="flex flex-col items-center"
+      childrenClassName="flex flex-col gap-6 items-center"
     >
       <div className="flex flex-col gap-2 items-center">
         <h2 className="text-6xl font-semibold text-center">
@@ -35,6 +35,20 @@ export default function CurrentWeather({}: Props) {
             },
           )}
         </h3>
+      </div>
+      <div className="flex justify-between w-full">
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-gray-500">Feels Like</p>
+          <p>{Math.round(data.current.feelslike_c)}</p>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-gray-500">Humidity</p>
+          <p>{data.current.humidity}%</p>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-gray-500">Wind</p>
+          <p>{data.current.wind_kph} kph</p>
+        </div>
       </div>
     </Card>
   );
