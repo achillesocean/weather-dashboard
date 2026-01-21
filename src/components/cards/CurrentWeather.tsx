@@ -10,7 +10,7 @@ type Props = {
 
 export default function CurrentWeather({ coords }: Props) {
   const { data } = useSuspenseQuery({
-    queryKey: ["weather"],
+    queryKey: ["weather", coords],
     queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
   });
 

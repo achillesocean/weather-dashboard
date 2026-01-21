@@ -8,9 +8,14 @@ import type { Coords } from "./types";
 
 function App() {
   const [coords, setCoords] = useState<Coords>({ lat: 9, lon: 38.75 });
+
+  const onMapClick = (lat: number, lon: number) => {
+    setCoords({ lat, lon });
+  };
+
   return (
     <div className="flex flex-col gap-8">
-      <Map />
+      <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather coords={coords} />
       <DailyForecast coords={coords} />
       <HourlyForecast coords={coords} />
