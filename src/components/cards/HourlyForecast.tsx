@@ -20,7 +20,10 @@ export default function HourlyForecast({ coords }: Props) {
     >
       {data?.forecast.forecastday[0].hour.map((hour) => {
         return (
-          <div className="flex flex-col gap-2 items-center p-2">
+          <div
+            key={hour.time_epoch}
+            className="flex flex-col gap-2 items-center p-2"
+          >
             <p className="whitespace-nowrap">
               {new Date(hour.time_epoch * 1000).toLocaleTimeString(undefined, {
                 hour: "numeric",

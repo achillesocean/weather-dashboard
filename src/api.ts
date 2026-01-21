@@ -1,4 +1,5 @@
 import { ForecastResponseSchema } from "./schemas/forecastSchema";
+import { CityResponseSchema } from "./schemas/geocodeSchema";
 import { WeatherSchema } from "./schemas/weatherSchema";
 
 const API_KEY = import.meta.env.VITE_API_KEY_2;
@@ -17,4 +18,14 @@ export async function getForecast({ lat, lon }: { lat: number; lon: number }) {
   );
   const data = await res.json();
   return ForecastResponseSchema.parse(data);
+}
+
+const GEO_API_KEY = import.meta.env.VITE_API_KEY_GEOCODE;
+
+export async function getGeocode(location: string) {
+  const res = await fetch(
+    `https://geocode.maps.co/search?city=${location}&api_key=${GEO_API_KEY}`,
+  );
+  const data = await res.json();
+  return CityResponseSchema.parse(data);
 }
