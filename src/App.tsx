@@ -8,6 +8,7 @@ import type { Coords } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import { getGeocode } from "./api";
 import LocationDropdown from "./components/dropdowns/LocationDropdown";
+import MapTypeDropdown from "./components/dropdowns/MapTypeDropdown";
 
 function App() {
   // Default to Tokyo or whatever your preferred start point is
@@ -16,6 +17,7 @@ function App() {
     lon: 139.6917,
   });
   const [location, setLocation] = useState("Tokyo");
+  const [mapType, setMapType] = useState("precipitationIntensity");
 
   const { data: geocodeData } = useQuery({
     queryKey: ["geocode", location],
@@ -38,8 +40,11 @@ function App() {
 
   return (
     <div className="flex flex-col gap-8">
-      <LocationDropdown location={location} setLocation={setLocation} />
-      <Map coords={coords} onMapClick={onMapClick} />
+      <div className="flex gap-8">
+        <LocationDropdown location={location} setLocation={setLocation} />
+        <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+      </div>
+      <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
       <CurrentWeather coords={coords} />
       <DailyForecast coords={coords} />
       <HourlyForecast coords={coords} />

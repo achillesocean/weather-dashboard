@@ -1,10 +1,17 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Coords } from "../types";
+import { useEffect } from "react";
+import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk";
 
-type Props = { coords: Coords; onMapClick: (lat: number, lon: number) => void };
+type Props = {
+  coords: Coords;
+  onMapClick: (lat: number, lon: number) => void;
+  mapType: string;
+};
 
-export default function Map({ coords, onMapClick }: Props) {
+const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
+export default function Map({ coords, onMapClick, mapType }: Props) {
   const { lat, lon } = coords;
 
   return (
@@ -12,13 +19,13 @@ export default function Map({ coords, onMapClick }: Props) {
       key={`${coords.lat},${coords.lon}`}
       center={[lat, lon]}
       zoom={5}
-      style={{ width: "700px", height: "500px" }}
+      style={{ width: "1000px", height: "500px" }}
     >
       <MapClick onMapClick={onMapClick} coords={coords} />
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <MapTileLayer />
+      {/* <TileLayer
+        url={`https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${mapType}/now.png?apikey=${TILE_API_KEY}`}
+      /> */}
       <Marker position={[lat, lon]} />
     </MapContainer>
   );
@@ -37,5 +44,24 @@ function MapClick({
     const { lat, lng } = e.latlng;
     onMapClick(lat, lng);
   });
+  return null;
+}
+
+function MapTileLayer() {
+  const map = useMap();
+
+  useEffect(() => {
+    const tileLayer = new MaptilerLayer({
+      apiKey: MAPTILER_API_KEY,
+      // style: "satellite",
+      style: "dark-basic",
+    });
+    tileLayer.addTo(map);
+
+    return () => {
+      map.removeLayer(tileLayer);
+    };
+  }, [map]);
+
   return null;
 }
