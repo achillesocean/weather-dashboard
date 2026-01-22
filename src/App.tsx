@@ -3,7 +3,7 @@ import HourlyForecast from "./components/cards/HourlyForecast";
 import CurrentWeather from "./components/cards/CurrentWeather";
 import AdditionalInfo from "./components/cards/AdditionalInfo";
 import Map from "./components/Map";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Coords } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import { getGeocode } from "./api";
@@ -24,34 +24,26 @@ function App() {
     enabled: location !== "Custom Map Point",
   });
 
-  // Sync API data to coordinates state
-  useEffect(() => {
-    if (geocodeData && geocodeData.length > 0) {
-      setCoords({
-        lat: geocodeData[0].lat,
-        lon: geocodeData[0].lon,
-      });
-      console.log("Geocode data updated coordinates: ", {
-        lat: geocodeData[0].lat,
-        lon: geocodeData[0].lon,
-      });
-    }
-    console.log("UseEffect triggered to fetch geocode data.");
-  }, [geocodeData]);
-
   const onMapClick = (lat: number, lon: number) => {
     setCoords({ lat, lon });
     setLocation("Custom Map Point"); // Use a specific string for clarity
   };
 
+  const coords =
+    location === "Custom Map Point"
+      ? coordinates
+      : geocodeData && geocodeData.length > 0
+        ? { lat: geocodeData[0].lat, lon: geocodeData[0].lon }
+        : coordinates;
+
   return (
     <div className="flex flex-col gap-8">
       <LocationDropdown location={location} setLocation={setLocation} />
-      <Map coords={coordinates} onMapClick={onMapClick} />
-      <CurrentWeather coords={coordinates} />
-      <DailyForecast coords={coordinates} />
-      <HourlyForecast coords={coordinates} />
-      <AdditionalInfo coords={coordinates} />
+      <Map coords={coords} onMapClick={onMapClick} />
+      <CurrentWeather coords={coords} />
+      <DailyForecast coords={coords} />
+      <HourlyForecast coords={coords} />
+      <AdditionalInfo coords={coords} />
     </div>
   );
 }
