@@ -9,6 +9,7 @@ export default function Map({ coords, onMapClick }: Props) {
 
   return (
     <MapContainer
+      key={`${coords.lat},${coords.lon}`}
       center={[lat, lon]}
       zoom={5}
       style={{ width: "700px", height: "500px" }}

@@ -10,7 +10,7 @@ type Props = {
 
 export default function CurrentWeather({ coords }: Props) {
   const { data } = useSuspenseQuery({
-    queryKey: ["weather", coords],
+    queryKey: ["weather", coords.lat, coords.lon],
     queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
   });
 
@@ -35,6 +35,7 @@ export default function CurrentWeather({ coords }: Props) {
               hour: "numeric",
               minute: "2-digit",
               hour12: true,
+              timeZone: data.location.tz_id,
             },
           )}
         </h3>

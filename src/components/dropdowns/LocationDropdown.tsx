@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import {
   Select,
   SelectTrigger,
@@ -6,15 +7,29 @@ import {
   SelectItem,
 } from "../ui/select";
 
-type Props = {};
+type Props = {
+  location: string;
+  setLocation: Dispatch<SetStateAction<string>>;
+};
 
-export default function LocationDropdown({}: Props) {
+export default function LocationDropdown({ location, setLocation }: Props) {
   return (
-    <Select>
+    <Select
+      value={location}
+      onValueChange={(value) => {
+        setLocation(value);
+        console.log("New location selected: ", value);
+      }}
+    >
       <SelectTrigger className="w-45">
-        <SelectValue placeholder="Theme" />
+        <SelectValue placeholder="Location" />
       </SelectTrigger>
       <SelectContent className="z-1001">
+        {/* If the user clicked the map, we add a temporary "Custom" item 
+            so the Select component stays 'controlled' and shows the correct state */}
+        {location === "Custom Map Point" && (
+          <SelectItem value="Custom Map Point">📍 Map Location</SelectItem>
+        )}
         {locations.map((city) => (
           <SelectItem key={city} value={city}>
             {city}

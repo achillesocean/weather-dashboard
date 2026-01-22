@@ -10,7 +10,7 @@ type Props = {
 
 export default function HourlyForecast({ coords }: Props) {
   const { data } = useQuery({
-    queryKey: ["forecast", coords],
+    queryKey: ["forecast", coords.lat, coords.lon],
     queryFn: () => getForecast({ lat: coords.lat, lon: coords.lon }),
   });
   return (

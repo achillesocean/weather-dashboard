@@ -10,7 +10,7 @@ const AddressSchema = z.object({
 const CitySchema = z.object({
   place_id: z.number(),
   osm_type: z.string(),
-  osm_id: z.string(),
+  osm_id: z.coerce.string(),
 
   lat: z.coerce.number(), // note: string, not number
   lon: z.coerce.number(), // note: string, not number

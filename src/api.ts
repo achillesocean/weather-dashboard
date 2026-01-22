@@ -26,6 +26,13 @@ export async function getGeocode(location: string) {
   const res = await fetch(
     `https://geocode.maps.co/search?city=${location}&api_key=${GEO_API_KEY}`,
   );
+  console.log("fetched geocode for location: ", location);
   const data = await res.json();
-  return CityResponseSchema.parse(data);
+  const result = CityResponseSchema.safeParse(data);
+  if (!result.success) {
+    console.error("Zod Validation Failed for Geocode:", result.error.format());
+    throw new Error("Invalid Geocode Data");
+  }
+
+  return result.data;
 }

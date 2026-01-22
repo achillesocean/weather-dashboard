@@ -10,7 +10,7 @@ type Props = {
 
 export default function DailyForecast({ coords }: Props) {
   const { data } = useQuery({
-    queryKey: ["forecast"],
+    queryKey: ["forecast", coords.lat, coords.lon],
     queryFn: () => getForecast({ lat: coords.lat, lon: coords.lon }),
   });
   return (
