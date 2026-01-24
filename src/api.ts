@@ -1,3 +1,4 @@
+import { AirPollutionSchema } from "./schemas/apiPollutionSchema";
 import { ForecastResponseSchema } from "./schemas/forecastSchema";
 import { CityResponseSchema } from "./schemas/geocodeSchema";
 import { WeatherSchema } from "./schemas/weatherSchema";
@@ -35,4 +36,18 @@ export async function getGeocode(location: string) {
   }
 
   return result.data;
+}
+
+export async function getAirPollution({
+  lat,
+  lon,
+}: {
+  lat: number;
+  lon: number;
+}) {
+  const res = await fetch(
+    `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${lat},${lon}&api=yes`,
+  );
+  const data = await res.json();
+  return AirPollutionSchema.parse(data);
 }
