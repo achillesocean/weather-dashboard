@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import Card from "./cards/Card";
 import { Slider } from "./ui/slider";
 import clsx from "clsx";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import Information from "src/assets/information.svg?react";
 
 type Props = { coords: Coords };
 
@@ -30,7 +32,20 @@ function AirPollution({ coords }: Props) {
       <h1 className="text-5xl font-semibold">
         {data.current.air_quality["gb-defra-index"]}
       </h1>
-      <h1 className="text-2xl font-semibold">AQI</h1>
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-semibold">AQI</h1>
+        <Tooltip>
+          <TooltipTrigger>
+            <Information className="size-4 invert text-gray-500" />
+          </TooltipTrigger>
+          <TooltipContent className="z-2000">
+            <p className="max-w-xs">
+              Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 is
+              Good, 2 is Fair, 3 is Moderate, 4 is Poor, and 5 is Very Poor.
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
       {Object.entries(data.current.air_quality)
         .filter(([key]) => key !== "gb-defra-index")
         .map(([key, value]) => {
@@ -74,9 +89,22 @@ function AirPollution({ coords }: Props) {
               className="hover:scale-105 transition-transform duration-300 from-sidebar-accent to-sidebar-accent/60 gap-0! "
             >
               <div className="flex justify-between">
-                <span className="text-gray-500 text-lg font-bold capitalize">
-                  {key.toUpperCase()}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-500 text-lg font-bold capitalize">
+                    {key}
+                  </span>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Information className="size-4 invert text-gray-500" />
+                    </TooltipTrigger>
+                    <TooltipContent className="z-2000">
+                      <p className="max-w-xs">
+                        Concentration of{" "}
+                        {pollutantNameMapping[key.toUpperCase() as Pollutant]}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
                 <span className="text-lg font-semibold">{value}</span>
               </div>
               <Slider min={0} max={max} value={[value]} disabled />
