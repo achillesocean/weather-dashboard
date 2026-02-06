@@ -14,6 +14,7 @@ import DailySkeleton from "./components/skeletons/DailySkeleton";
 import HourlySkeleton from "./components/skeletons/HourlySkeleton";
 import AdditionalInfoSkeleton from "./components/skeletons/AdditionalInfoSkeleton";
 import SidePanel from "./components/SidePanel";
+import Hamburger from "src/assets/hamburger.svg?react";
 
 function App() {
   // Default to Tokyo or whatever your preferred start point is
@@ -23,6 +24,7 @@ function App() {
   });
   const [location, setLocation] = useState("Tokyo");
   const [mapType, setMapType] = useState("precipitationIntensity");
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(true);
 
   const { data: geocodeData } = useQuery({
     queryKey: ["geocode", location],
@@ -55,6 +57,9 @@ function App() {
             <h1 className="text-2xl font-semibold">Map Type: </h1>
             <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
           </div>
+          <button onClick={() => setIsSidePanelOpen(true)}>
+            <Hamburger className="size-6 invert -ml-2 hover:opacity-70 transition-opacity" />
+          </button>
         </div>
         <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
         <Suspense fallback={<CurrentSkeleton />}>
@@ -70,7 +75,11 @@ function App() {
           <AdditionalInfo coords={coords} />
         </Suspense>
       </div>
-      <SidePanel coords={coords} />
+      <SidePanel
+        coords={coords}
+        isSidePanelOpen={isSidePanelOpen}
+        setIsSidePanelOpen={setIsSidePanelOpen}
+      />
     </>
   );
 }
