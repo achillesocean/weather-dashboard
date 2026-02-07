@@ -24,7 +24,7 @@ function App() {
   });
   const [location, setLocation] = useState("Tokyo");
   const [mapType, setMapType] = useState("precipitationIntensity");
-  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(true);
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
 
   const { data: geocodeData } = useQuery({
     queryKey: ["geocode", location],
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 p-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))]">
         <div className="flex gap-8">
           <div className="flex gap-4">
             <h1 className="text-2xl font-semibold">Location: </h1>
@@ -58,22 +58,34 @@ function App() {
             <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
           </div>
           <button onClick={() => setIsSidePanelOpen(true)}>
-            <Hamburger className="size-6 invert -ml-2 hover:opacity-70 transition-opacity" />
+            <Hamburger className="size-6 invert -ml-2 hover:opacity-70 transition-opacity lg:hidden" />
           </button>
         </div>
-        <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
-        <Suspense fallback={<CurrentSkeleton />}>
-          <CurrentWeather coords={coords} />
-        </Suspense>
-        <Suspense fallback={<DailySkeleton />}>
-          <DailyForecast coords={coords} />
-        </Suspense>
-        <Suspense fallback={<HourlySkeleton />}>
-          <HourlyForecast coords={coords} />
-        </Suspense>
-        <Suspense fallback={<AdditionalInfoSkeleton />}>
-          <AdditionalInfo coords={coords} />
-        </Suspense>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="col-span-1 md:col-span-2">
+            <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+          </div>
+          <div className="col-span-1">
+            <Suspense fallback={<CurrentSkeleton />}>
+              <CurrentWeather coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1">
+            <Suspense fallback={<DailySkeleton />}>
+              <DailyForecast coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <Suspense fallback={<HourlySkeleton />}>
+              <HourlyForecast coords={coords} />
+            </Suspense>
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <Suspense fallback={<AdditionalInfoSkeleton />}>
+              <AdditionalInfo coords={coords} />
+            </Suspense>
+          </div>
+        </div>
       </div>
       <SidePanel
         coords={coords}
