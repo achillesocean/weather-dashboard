@@ -47,7 +47,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-8 p-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))]">
+      <div className="flex flex-col gap-8 p-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen">
         <div className="flex gap-8">
           <div className="flex gap-4">
             <h1 className="text-2xl font-semibold">Location: </h1>
@@ -61,26 +61,26 @@ function App() {
             <Hamburger className="size-6 invert -ml-2 hover:opacity-70 transition-opacity lg:hidden" />
           </button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-4">
+          <div className="h-120 2xl:h-auto col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
             <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 2xl:row-span-2 order-2">
             <Suspense fallback={<CurrentSkeleton />}>
               <CurrentWeather coords={coords} />
             </Suspense>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 order-3 2xl:order-4 2xl:row-span-2">
             <Suspense fallback={<DailySkeleton />}>
               <DailyForecast coords={coords} />
             </Suspense>
           </div>
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-4 2xl:order-3">
             <Suspense fallback={<HourlySkeleton />}>
               <HourlyForecast coords={coords} />
             </Suspense>
           </div>
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-2 2xl:row-span-1 order-5">
             <Suspense fallback={<AdditionalInfoSkeleton />}>
               <AdditionalInfo coords={coords} />
             </Suspense>
