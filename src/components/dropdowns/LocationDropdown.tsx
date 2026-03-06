@@ -21,7 +21,7 @@ export default function LocationDropdown({ location, setLocation }: Props) {
         console.log("New location selected: ", value);
       }}
     >
-      <SelectTrigger className="w-45">
+      <SelectTrigger className="w-full xs:w-45">
         <SelectValue placeholder="Location" />
       </SelectTrigger>
       <SelectContent className="z-1001">

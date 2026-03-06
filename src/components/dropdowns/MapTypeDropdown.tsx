@@ -21,7 +21,7 @@ export default function MapTypeDropdown({ mapType, setMapType }: Props) {
         console.log("New map type selected: ", value);
       }}
     >
-      <SelectTrigger className="w-45">
+      <SelectTrigger className="w-full xs:w-45">
         <SelectValue placeholder="Map Type" />
       </SelectTrigger>
       <SelectContent className="z-1001">
