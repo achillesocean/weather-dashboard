@@ -7,7 +7,7 @@ export default function CurrentSkeleton({}: Props) {
   return (
     <Card
       title="Current Weather"
-      childrenClassName="flex flex-col gap-6 items-center"
+      childrenClassName="flex flex-col gap-6 items-center 2xl:justify-between"
     >
       <div className="flex flex-col gap-2 items-center">
         <Skeleton className="h-24 w-24 rounded-full" />
