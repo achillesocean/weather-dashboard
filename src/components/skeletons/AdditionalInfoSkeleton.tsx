@@ -13,7 +13,7 @@ export default function AdditionalInfoSkeleton({}: Props) {
         <div key={index} className="flex justify-between">
           <div className="flex gap-4">
             <Skeleton className="w-20 h-8" />
-            <Skeleton className="size-8 invert rounded-full" />
+            <Skeleton className="size-8  rounded-full" />
           </div>
           <Skeleton className="size-8" />
         </div>

@@ -25,7 +25,7 @@ export default function AdditionalInfo({ coords }: Props) {
         <div key={label} className="flex justify-between">
           <div className="flex gap-4">
             <span className="text-gray-500">{label}</span>
-            <Icon className="size-8 invert" />
+            <Icon className="size-8 " />
           </div>
           <span>{data.current[value]}</span>
         </div>

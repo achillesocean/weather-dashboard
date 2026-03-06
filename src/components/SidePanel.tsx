@@ -26,7 +26,7 @@ export default function SidePanel(props: Props) {
       )}
     >
       <button onClick={() => setIsSidePanelOpen(false)}>
-        <Chevron className="size-6 invert -ml-2 hover:opacity-70 transition-opacity lg:hidden" />
+        <Chevron className="size-6  -ml-2 hover:opacity-70 transition-opacity lg:hidden" />
       </button>
       <Suspense fallback={<SidePanelSkeleton />}>
         <AirPollution {...props} />
@@ -51,7 +51,7 @@ function AirPollution({ coords }: Props) {
         <h1 className="text-2xl font-semibold">AQI</h1>
         <Tooltip>
           <TooltipTrigger>
-            <Information className="size-4 invert text-gray-500" />
+            <Information className="size-4  text-gray-500" />
           </TooltipTrigger>
           <TooltipContent className="z-2000">
             <p className="max-w-xs">
@@ -110,7 +110,7 @@ function AirPollution({ coords }: Props) {
                   </span>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Information className="size-4 invert text-gray-500" />
+                      <Information className="size-4  text-gray-500" />
                     </TooltipTrigger>
                     <TooltipContent className="z-2000">
                       <p className="max-w-xs">
