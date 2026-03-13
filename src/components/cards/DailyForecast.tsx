@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getForecast } from "../../api";
 import WeatherIcon from "../WeatherIcon";
 import type { Coords } from "../../types";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function DailyForecast({ coords }: Props) {
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["forecast", coords.lat, coords.lon],
     queryFn: () => getForecast({ lat: coords.lat, lon: coords.lon }),
   });

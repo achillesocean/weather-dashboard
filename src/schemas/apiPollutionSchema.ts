@@ -67,7 +67,7 @@ export const AirPollutionSchema = z.object({
       so2: z.number(),
       pm2_5: z.number(),
       pm10: z.number(),
-      "us-epa-index": z.number(),
+      // "us-epa-index": z.number(),
       "gb-defra-index": z.number(),
     }),
 

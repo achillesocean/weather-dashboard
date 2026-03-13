@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
-      <div className="flex flex-col gap-8 pt-4 p-8 xs:pt-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen 2xl:min-h-[1120px]:">
+      <div className="flex flex-col gap-8 pt-4 p-8 xs:pt-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen 2xl:min-h-280">
         {/* remove the w-full if small scrolling effect happens on small screens */}
         <div className="flex flex-col gap-4 xs:flex-row xs:gap-8">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4">

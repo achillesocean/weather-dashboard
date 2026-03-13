@@ -130,6 +130,7 @@ function AirPollution({ coords }: Props) {
               <div className="flex justify-between">
                 {Object.keys(pollutant).map((quality) => (
                   <span
+                    key={quality}
                     className={clsx(
                       "px-2 py-1 rounded-md text-xs font-medium",
                       quality === currentLevel

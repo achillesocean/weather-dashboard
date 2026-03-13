@@ -46,7 +46,7 @@ export async function getAirPollution({
   lon: number;
 }) {
   const res = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${lat},${lon}&api=yes`,
+    `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${lat},${lon}&aqi=yes`,
   );
   const data = await res.json();
   return AirPollutionSchema.parse(data);
