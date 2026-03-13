@@ -1,4 +1,4 @@
-import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Coords } from "../types";
 import { useEffect } from "react";
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
-export default function Map({ coords, onMapClick, mapType }: Props) {
+export default function Map({ coords, onMapClick }: Props) {
   const { lat, lon } = coords;
 
   return (
