@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import Hamburger from "src/assets/hamburger.svg?react";
+import Hamburger from "/src/assets/hamburger.svg?react";
 import LightDarkToggle from "./LightDarkToggle";
 
 type Props = {

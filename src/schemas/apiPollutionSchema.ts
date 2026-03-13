@@ -71,9 +71,9 @@ export const AirPollutionSchema = z.object({
       "gb-defra-index": z.number(),
     }),
 
-    short_rad: z.number(),
-    diff_rad: z.number(),
-    dni: z.number(),
-    gti: z.number(),
+    short_rad: z.optional(z.number()),
+    diff_rad: z.optional(z.number()),
+    dni: z.optional(z.number()),
+    gti: z.optional(z.number()),
   }),
 });

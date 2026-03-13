@@ -6,8 +6,8 @@ import Card from "./cards/Card";
 import { Slider } from "./ui/slider";
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import Information from "src/assets/information.svg?react";
-import Chevron from "src/assets/ChevronLeft.svg?react";
+import Information from "/src/assets/information.svg?react";
+import Chevron from "/src/assets/ChevronLeft.svg?react";
 import SidePanelSkeleton from "./skeletons/SidePanelSkeleton";
 
 type Props = {

@@ -60,9 +60,9 @@ export const WeatherSchema = z.object({
     gust_mph: z.number(),
     gust_kph: z.number(),
 
-    short_rad: z.number(),
-    diff_rad: z.number(),
-    dni: z.number(),
-    gti: z.number(),
+    short_rad: z.optional(z.number()),
+    diff_rad: z.optional(z.number()),
+    dni: z.optional(z.number()),
+    gti: z.optional(z.number()),
   }),
 });

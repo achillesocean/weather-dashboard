@@ -1,5 +1,5 @@
-import Sun from "src/assets/sun.svg?react";
-import Moon from "src/assets/moon.svg?react";
+import Sun from "/src/assets/sun.svg?react";
+import Moon from "/src/assets/moon.svg?react";
 import { Switch } from "./ui/switch";
 import { useTheme } from "./ThemeProvider";
 
